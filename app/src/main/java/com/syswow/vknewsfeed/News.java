@@ -40,8 +40,7 @@ public class News extends Activity {
 
     //Request to VK
     public void getNews() {
-        VKRequest newsRequest = new VKRequest("wall.get", VKParameters.from("count", 20,
-                "filter", "all", "extended", 1));
+        VKRequest newsRequest = new VKRequest("newsfeed.get", VKParameters.from("filters", "post"));
         newsRequest.executeWithListener(new VKRequest.VKRequestListener() {
 
             @Override
@@ -63,8 +62,11 @@ public class News extends Activity {
     }
 
     public void getNewsData(JSONObject jsonObject) {
+        Log.d("VKNEWSFEED", jsonObject.toString());
+
         JSONObject response;
         JSONArray items;
+        JSONArray groups;
         JSONArray profiles;
 
         LinearLayout linLayout = (LinearLayout) findViewById(R.id.linLayout);
@@ -74,14 +76,15 @@ public class News extends Activity {
             response = jsonObject.getJSONObject("response");
             items = response.getJSONArray("items");
             profiles = response.getJSONArray("profiles");
+            groups = response.getJSONArray("groups");
 
             //Get all news
             for(int itemsCount = 0; itemsCount < items.length(); itemsCount++ ) {
                 Post post  = new Post(
                         profiles,
-                        items.getJSONObject(itemsCount).getInt("id"),
-                        items.getJSONObject(itemsCount).getInt("from_id"),
-                        items.getJSONObject(itemsCount).getInt("owner_id"),
+                        groups,
+                        items.getJSONObject(itemsCount).getInt("post_id"),
+                        items.getJSONObject(itemsCount).getInt("source_id"),
                         items.getJSONObject(itemsCount).getLong("date"),
                         items.getJSONObject(itemsCount).getString("text"));
                 posts.add(post);

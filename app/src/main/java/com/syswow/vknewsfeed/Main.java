@@ -22,7 +22,7 @@ public class Main extends Activity {
 
     private final static String S_TOKEN_KEY = "flNGnxw7l4geuEvOlOpd";
     private final static String APP_ID = "4467507";
-    private static String[] sMyScope = new String[]{ VKScope.WALL };
+    private static String[] sMyScope = new String[]{ VKScope.WALL, VKScope.FRIENDS };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
