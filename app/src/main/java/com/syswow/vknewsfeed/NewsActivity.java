@@ -39,7 +39,8 @@ public class NewsActivity extends Activity {
 
     //Request to VK
     public void getNews() {
-        VKRequest newsRequest = new VKRequest("newsfeed.get", VKParameters.from("filters", "post"));
+        VKRequest newsRequest = new VKRequest("newsfeed.get", VKParameters.from("filters", "post",
+                "count", 10));
         newsRequest.executeWithListener(new VKRequest.VKRequestListener() {
 
             @Override
@@ -82,6 +83,7 @@ public class NewsActivity extends Activity {
                 Post post  = new Post(
                         profiles,
                         groups,
+                        items.getJSONObject(itemsCount).getJSONArray("attachments"),
                         items.getJSONObject(itemsCount).getInt("post_id"),
                         items.getJSONObject(itemsCount).getInt("source_id"),
                         items.getJSONObject(itemsCount).getLong("date"),
@@ -94,9 +96,16 @@ public class NewsActivity extends Activity {
                 TextView postData = (TextView) item.findViewById(R.id.news_data);
                 ImageView postAvatar = (ImageView) item.findViewById(R.id.news_ava);
 
-                ImagesDownloader imagesDownloader = new ImagesDownloader();
-                imagesDownloader.setImageView(postAvatar);
-                imagesDownloader.execute(post.getAvatar50url());
+                ImagesDownloader avatarsDownloader = new ImagesDownloader();
+                avatarsDownloader.setImageView(postAvatar);
+                avatarsDownloader.execute(post.getAvatar50url());
+
+                if(post.getPostHaveImages() == true) {
+                    ImageView postImage = (ImageView) item.findViewById(R.id.post_image);
+                    ImagesDownloader imagesDownloader = new ImagesDownloader();
+                    imagesDownloader.setImageView(postImage);
+                    imagesDownloader.execute(post.getAttachmentsPhoto604url());
+                }
 
                 postName.setText(post.getAuthor());
                 postText.setText(post.getText());
