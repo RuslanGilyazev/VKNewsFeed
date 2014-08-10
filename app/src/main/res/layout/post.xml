@@ -26,19 +26,26 @@
         android:paddingTop="20dp"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
+    <ImageView
+        android:id="@+id/news_ava"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_launcher" />
+
     <TextView
         android:id="@+id/news_post"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Post text"
         android:textSize="16sp"
-        android:layout_gravity="bottom|left"
+        android:layout_gravity="left|center_vertical"
         android:paddingTop="60dp"/>
 
     <ImageView
-        android:id="@+id/news_ava"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/ic_launcher" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/post_image"
+        android:padding="5dp"
+        android:layout_gravity="center_horizontal|bottom" />
 
 </FrameLayout>
