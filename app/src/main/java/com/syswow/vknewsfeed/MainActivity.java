@@ -18,7 +18,7 @@ import com.vk.sdk.VKUIHelper;
 import com.vk.sdk.api.VKError;
 
 
-public class Main extends Activity {
+public class MainActivity extends Activity {
 
     private final static String S_TOKEN_KEY = "flNGnxw7l4geuEvOlOpd";
     private final static String APP_ID = "4467507";
@@ -69,21 +69,21 @@ public class Main extends Activity {
 
         @Override
         public void onAccessDenied(VKError authorizationError) {
-            new AlertDialog.Builder(Main.this)
+            new AlertDialog.Builder(MainActivity.this)
                     .setMessage(authorizationError.errorMessage)
                     .show();
         }
 
         @Override
         public void onReceiveNewToken(VKAccessToken newToken) {
-            newToken.saveTokenToSharedPreferences(Main.this, S_TOKEN_KEY);
-            Intent i = new Intent(Main.this, News.class);
+            newToken.saveTokenToSharedPreferences(MainActivity.this, S_TOKEN_KEY);
+            Intent i = new Intent(MainActivity.this, NewsActivity.class);
             startActivity(i);
         }
 
         @Override
         public void onAcceptUserToken(VKAccessToken token) {
-            Intent i = new Intent(Main.this, News.class);
+            Intent i = new Intent(MainActivity.this, NewsActivity.class);
             startActivity(i);
         }
     };

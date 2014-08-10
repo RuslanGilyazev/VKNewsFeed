@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.syswow.vknewsfeed.R;
 import com.vk.sdk.VKSdk;
 import com.vk.sdk.VKUIHelper;
 import com.vk.sdk.api.VKError;
@@ -27,7 +26,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class News extends Activity {
+public class NewsActivity extends Activity {
     ArrayList<Post> posts = new ArrayList<Post>();
 
 
@@ -145,7 +144,7 @@ public class News extends Activity {
         }
         if (id == R.id.action_logout) {
             VKSdk.logout();
-            startActivity(new Intent(this, Main.class));
+            startActivity(new Intent(this, MainActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }
